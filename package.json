@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kmlamthinkful/BlogAPIChallenge/issues"
   },
-  "homepage": "https://github.com/kmlamthinkful/BlogAPIChallenge#readme"
+  "homepage": "https://github.com/kmlamthinkful/BlogAPIChallenge#readme",
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
 }
