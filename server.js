@@ -1,4 +1,5 @@
 const express = require('express');
+const router
 const bodyParser = require('body-parser');
 const {BlogPosts} = require('./models');
 const jsonParser = bodyParser.json();
@@ -6,12 +7,12 @@ const app = express();
 
 
 //GET
-app.get('/blogChallenge', (req, res) => {
+app.get('/blog-posts', (req, res) => {
     res.json(BlogPosts.get());
 });
 
 //POST
-app.post('/blogChallenge', jsonParser, (req, res) => {
+app.post('/blog-postse', jsonParser, (req, res) => {
     const requiredFields = ['title', 'content', 'author'];
     for (let i=0; i<requiredFields.length; i++){
         const field =requiredFields[i];
@@ -26,7 +27,7 @@ app.post('/blogChallenge', jsonParser, (req, res) => {
 });
 
 //PUT
-app.put('/blogChallenge/:id', jsonParser, (req, res) => {
+app.put('/blog-posts/:id', jsonParser, (req, res) => {
     const requiredFields = ['title', 'content', 'author', 'id'];
     for (let i=0; i<requiredFields.length; i++){
         const field =requiredFields[i];
@@ -55,7 +56,7 @@ app.put('/blogChallenge/:id', jsonParser, (req, res) => {
 });
 
 //DELETE
-app.delete('/blogChallenge/:id', (req, res) => {
+app.delete('/blog-posts/:id', (req, res) => {
     BlogPosts.delete(req.params.id);
     console.log(`Deleted Shopping list item \`${req.params.id}\``);
     res.status(204).end();
