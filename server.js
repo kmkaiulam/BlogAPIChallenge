@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-
+const morgan = require('morgan');
 const blogPostsRouter = require('./blogPostsRouter');
 
 
 app.use(express.static('public'));
-
+app.use(morgan('common'));
 app.get('/', (req, res) => {
     res.sendFile(_dirname + '/public/index.html');
 })
