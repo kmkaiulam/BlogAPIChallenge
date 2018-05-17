@@ -26,7 +26,7 @@ app.post('/blogChallenge', jsonParser, (req, res) => {
 });
 
 //PUT
-app.put('/blogChallenge', jsonParser, (req, res) => {
+app.put('/blogChallenge/:id', jsonParser, (req, res) => {
     const requiredFields = ['title', 'content', 'author', 'id'];
     for (let i=0; i<requiredFields.length; i++){
         const field =requiredFields[i];
@@ -42,18 +42,24 @@ app.put('/blogChallenge', jsonParser, (req, res) => {
         return res.status(400).send(message);
     }
     console.log(`Updating blog post entry \`${req.params.id}\``);
-    BlogPosts.update({
+     const updatedBlogPosts =
+     BlogPosts.update({
         id: req.params.id,
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
         publishDate: req.body.publishDate,
     });
-    }
-);
+    console.log(updatedBlogPosts);
+    res.status(204).end();
+});
 
 //DELETE
-
+app.delete('/blogChallenge/:id', (req, res) => {
+    BlogPosts.delete(req.params.id);
+    console.log(`Deleted Shopping list item \`${req.params.id}\``);
+    res.status(204).end();
+});
 
 
 app.listen(process.env.PORT || 8080, () => {
