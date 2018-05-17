@@ -25,6 +25,7 @@ const BlogPosts = {
       publishDate: publishDate || Date.now()
     };
     this.posts.push(post);
+    console.log(this);
     return post;
   },
   get: function(id=null) {
@@ -59,7 +60,7 @@ const BlogPosts = {
     return this.posts[postIndex];
   }
 };
-
+//Explain please "this" is confusing how is it grabbing storage?
 function createBlogPostsModel() {
   const storage = Object.create(BlogPosts);
   storage.posts = [];

@@ -1,9 +1,6 @@
 const express = require('express');
-const router = express.Router();
 const bodyParser = require('body-parser');
-
 const {BlogPosts} = require('./models');
-
 const jsonParser = bodyParser.json();
 const app = express();
 
@@ -52,19 +49,10 @@ app.put('/blogChallenge', jsonParser, (req, res) => {
         author: req.body.author,
         publishDate: req.body.publishDate,
     });
-
-
     }
-}
 );
 
 //DELETE
-
-
-
-
-
-
 
 
 
