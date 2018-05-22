@@ -59,6 +59,39 @@ describe('Blog Posts', function() {
         expect(res.body).to.deep.equal(Object.assign(newPost, {id: res.body.id, publishDate: res.body.publishDate}));
         });
       });
+
+      //perform a GET request
+      //grab ID
+      //another chai.request
+      //then using the id of the function edit
+      //write test criteria
+      it('should update a blog post on PUT', function *(){
+        const updatedPost = {
+                              title: 'TestPost', 
+                              content: 'testingupdate', 
+                              author: 'Kenny'
+                            }
+        return chai.request(app)
+          .get('/blog-posts')
+          .then(function(res){
+           updatedPost.id = res.body[0].id;
+           return chai.request(app)
+            .put(`/blog-posts/${updatedPost.id}`)
+            .send(updatedPost)
+          })
+            .then(function(res){
+              expect(res).to.have.status(204);
+              expect(res).to.be.a.json;
+              expect(res.body).to.deep.equal(Object.assign(updatedPost, {publishDate: res.body[0].publishDate}));
+            });
+        });
+      
+
+
+
+
+
+
     });
 
     
