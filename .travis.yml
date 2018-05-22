@@ -1,2 +1,10 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: n7AfbRfEv4WzTmzBilwSM1sNIyOCPW2Yj2RmNfQA4OCTRHnaUUd9iAv1kVNcE1l3fH4jSZzstqv84oYG+Dz7WeBc5uIh/bE+lnuUSWHL/k6fZ1jL+sOhKiwbrlqvU8YxM++g+CwRL5Sd/2JdhsrwpmWQh/uRH+66HDZvBR7jMPo5ahALx0RxjtnGfwQavngl4NUBA1Rrjp+iemPRO2oG1KW9njx9tMR8iCUG8yPa2cly3ug8WoEHX4kGVMYp+xDWNiWLaPQfaQ2JH9fJ6lMH9rIQzurkCQbFoa1sZyt7ddQZLsl8c8gsV65J4NFyZ31X7L3Sjrt8MaYdwIprNQBTq/IXJwHmW7XcZUNFRQnNcZRdTxXl9HqqzHDsD+5N4ag13/RtIQli0ANgCd0QqT12oxdmKAP1Gk0L+cEy0B2ZmHjLF1pi8RY+pMwkO3TtG0i0mq7jAbCk7czwaxGgHKluTJGJgB2WBR5GsOgSPeX2MDXyW9s6qrXsuKmGwj0o3JGsBOn2CBxfIVh00pQgQ2g6fMrimQdRebanTqlIabfnt14zy5AOHhkZi9D0sK97SFDwDWMzniesi90i5/221T24Xm5VFp/ASABVXe+XTQ2hPQEyerbJ5r2PolzutRFO1odkRUmbGYsZC9m5B9l2U2lq4bN8u+tEj2C7DhqJCllRkqw=
+  app: blogapichallenge
+  on:
+    repo: kmlamthinkful/BlogAPIChallenge
+    branch: addFeature/tests
