@@ -60,7 +60,6 @@ const BlogPosts = {
     return this.posts[postIndex];
   }
 };
-//Explain please "this" is confusing how is it grabbing storage?
 function createBlogPostsModel() {
   const storage = Object.create(BlogPosts);
   storage.posts = [];

@@ -44,7 +44,7 @@ describe('Blog Posts', function() {
     });
       
     
-    //create a blog post to POST and send
+  
 
     it('should create a new blog post on POST', function(){
       const newPost = {title: 'newTestPost', content: 'testing', author: 'Kenny'}
@@ -60,16 +60,12 @@ describe('Blog Posts', function() {
         });
       });
 
-      //perform a GET request
-      //grab ID
-      //another chai.request
-      //then using the id of the function edit
-      //write test criteria
-      it('should update a blog post on PUT', function *(){
+      it('should update a blog post on PUT', function(){
         const updatedPost = {
                               title: 'TestPost', 
                               content: 'testingupdate', 
-                              author: 'Kenny'
+                              author: 'Kenny',
+                              publishDate: 'modified'
                             }
         return chai.request(app)
           .get('/blog-posts')
@@ -80,19 +76,24 @@ describe('Blog Posts', function() {
             .send(updatedPost)
           })
             .then(function(res){
-              expect(res).to.have.status(204);
+              expect(res).to.have.status(200);
               expect(res).to.be.a.json;
-              expect(res.body).to.deep.equal(Object.assign(updatedPost, {publishDate: res.body[0].publishDate}));
-            });
+              expect(res.body).to.deep.equal(updatedPost);
+          });
+      });
+        //had issues dealing with deep equal function and the publishDate, fixed it by modifying blogPostsRouter.js to have status 200 and to send data back)
+      it('should delete a blog post on DELETE', function (){
+        return chai.request(app)
+        .get('/blog-posts')
+        .then(function(res){
+          return chai.request(app)
+          .delete(`/blog-posts/${res.body[0].id}`)
+        })
+          .then(function(res){
+            expect(res).to.have.status(204);
         });
-      
-
-
-
-
-
-
     });
+  });
 
     
 

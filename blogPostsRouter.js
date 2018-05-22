@@ -56,10 +56,9 @@ router.put('/:id', jsonParser, (req, res) => {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
-        publishDate: req.body.publishDate,
+        publishDate: req.body.publishDate
     });
-    console.log(updatedBlogPosts);
-    res.status(204).end();
+    res.status(200).send(updatedBlogPosts);
 });
 
 //DELETE
