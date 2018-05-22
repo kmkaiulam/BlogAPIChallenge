@@ -30,14 +30,15 @@ describe('Blog Posts', function() {
         expect(res).to.be.json;
         expect(res.body).to.be.a('array');
         expect(res.body.length).to.be.at.least(1);
-        const expectedKeys= ['id', 'title', 'content', 'author'];
+        const expectedKeys= ['id', 'title', 'content', 'author', 'publishDate'];
         res.body.forEach(function(blogpost){
           expect(blogpost).to.be.a('object');
           expect(blogpost).to.include.keys(expectedKeys);
           expect(blogpost.id).to.not.equal(null || undefined);
           expect(blogpost.title).to.be.a('string');
           expect(blogpost.content).to.be.a('string');
-          expect(blopost.author).to.be.a('string');
+          expect(blogpost.author).to.be.a('string');
+          expect(blogpost.publishDate).to.be.a('number');
         });
       });
     });  
