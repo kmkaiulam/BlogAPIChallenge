@@ -10,8 +10,8 @@ const {BlogPost} = require('./models');
 router.get('/', (req, res) => {
     BlogPost
         .find()
-        .then(posts => {
-            res.json(posts.map(post => post.serialize()));
+        .then(blogpostdatas => {
+            res.json(blogpostdatas.map(blogpostdata => blogpostdata.serialize()));
         })
           .catch(err => {
                 console.error(err);
@@ -19,11 +19,23 @@ router.get('/', (req, res) => {
               }); 
           });
         
-    
+//GET a post by ID
+router.get('/:id', (req, res) => {
+    BlogPost
+        .findById(req.params.id)
+        .then(blogpostdata => {
+            res.json(blogpostdata.serialize());
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' });
+          }); 
+      });
+
+
    
    
-    
-/*
+  /*  
 //POST
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['title', 'content', 'author'];
