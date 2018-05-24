@@ -4,14 +4,9 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {BlogPosts} = require('./models');
+const {BlogPost} = require('./models');
 const blogPostsRouter = require('./blogPostsRouter');
 
-
-//add some entries
-BlogPosts.create('First Post', 'Lorem ipsum', 'Max');
-BlogPosts.create('Second Post', 'ipsum', 'Sam');
-BlogPosts.create('Third Post', 'Quid pro quo', 'Ben');
 
 //GET
 router.get('/', (req, res) => {
