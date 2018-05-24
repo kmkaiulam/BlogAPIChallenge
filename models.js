@@ -2,16 +2,14 @@
 const mongoose = require('mongoose');
 
 
-//write schema for blogposts
 
-
-const blogPostSchema = mongoose.schema({
-  title:  {type: String , required: true},
+const blogPostSchema = mongoose.Schema({
+  title: {type: String , required: true},
   author: {
     firstName: {type: String, required: true},
     lastName:  {type: String, required: true}
           },
-  content: {type: String, required: true}
+    content: {type: String, required: true}
   });
   
 //virtual fullName
@@ -28,10 +26,10 @@ blogPostSchema.methods.serialize = function(){
     title: this.title,
     author: this.fullName,
     content: this.content,
-  }
-}
+  };
+};
 
-
-const BlogPost = mongoose.model('BlogPost', blogPostSchema);
+//mongoose.model looks for a database plural version of your collection name
+const BlogPost = mongoose.model('blogpostdata', blogPostSchema);
 
 module.exports = {BlogPost};

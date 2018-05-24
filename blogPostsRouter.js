@@ -1,20 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const {BlogPost} = require('./models');
-const blogPostsRouter = require('./blogPostsRouter');
 
 
 //GET all entries
 router.get('/', (req, res) => {
     BlogPost
         .find()
-        .then(function(blogposts){
-console.log(blogposts);
-        });
-    });
-
+        .then(posts => {
+            res.json(posts.map(post => post.serialize()));
+        })
+          .catch(err => {
+                console.error(err);
+                res.status(500).json({ message: 'Internal server error' });
+              }); 
+          });
+        
     
    
    

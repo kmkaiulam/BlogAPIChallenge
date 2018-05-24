@@ -1,12 +1,10 @@
 const express = require('express');
-
 const morgan = require('morgan');
 const blogPostsRouter = require('./blogPostsRouter');
 const mongoose = require('mongoose');
-
 mongoose.Promise = global.Promise;
 
-const {PORT, DATABASE_URL} = require ('/config');
+const {PORT, DATABASE_URL} = require ('./config');
 
 
 const app = express();
@@ -16,8 +14,6 @@ app.use(morgan('common'));
 app.get('/', (req, res) => {
     res.sendFile(_dirname + '/public/index.html');
 });
-
-
 
 app.use('/blog-posts', blogPostsRouter);
 
