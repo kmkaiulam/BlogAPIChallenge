@@ -1,18 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
 
 const {BlogPost} = require('./models');
 const blogPostsRouter = require('./blogPostsRouter');
 
 
-//GET
+//GET all entries
 router.get('/', (req, res) => {
-    res.json(BlogPosts.get());
-});
+    BlogPost
+        .find()
+        .then(function(blogposts){
+console.log(blogposts);
+        });
+    });
 
+    
+   
+   
+    
+/*
 //POST
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['title', 'content', 'author'];
@@ -62,5 +69,5 @@ router.delete('/:id', (req, res) => {
     console.log(`Deleted Shopping list item \`${req.params.id}\``);
     res.status(204).end();
 });
-
+*/
 module.exports = router;
