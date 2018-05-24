@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const blogPostsRouter = require('./blogPostsRouter');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require ('/config');
 
 
 app.use(express.static('public'));
