@@ -62,13 +62,8 @@ router.post('/',  (req, res) => {
         });
     });
 
-
-    
-  /*  
-    
-
 //PUT
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/:id', (req, res) => {
     const requiredFields = ['title', 'content', 'author', 'id'];
     for (let i=0; i<requiredFields.length; i++){
         const field =requiredFields[i];
@@ -84,17 +79,29 @@ router.put('/:id', jsonParser, (req, res) => {
         return res.status(400).send(message);
     }
     console.log(`Updating blog post entry \`${req.params.id}\``);
-     const updatedBlogPosts =
-     BlogPosts.update({
-        id: req.params.id,
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        publishDate: req.body.publishDate
-    });
-    res.status(200).send(updatedBlogPosts);
-});
+    
+    //limit what can be updated
+    const toUpdate = {};
+    const updateableFields = ['title', 'content', 'author.firstName', 'author.lastName']; 
+    
+    updateableFields.forEach(field => {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    })
+    
+    BlogPost
+        .findByIdAndUpdate(req.params.id, { $set: toUpdate})
+          .then(blogpostdata => {
+              res.status(200).send(blogpostdata.serialize());
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ message: 'Internal server error' }); 
+            });
+        });
 
+/*
 //DELETE
 router.delete('/:id', (req, res) => {
     BlogPosts.delete(req.params.id);
