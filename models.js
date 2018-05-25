@@ -13,8 +13,8 @@ const blogPostSchema = mongoose.Schema({
   });
   
 //virtual fullName
-blogPostSchema.virtual('fullName').get(function(){
-  return `${this.firstName} ${this.lastName}`.trim()
+blogPostSchema.virtual('authorName').get(function(){
+  return `${this.author.firstName} ${this.author.lastName}`.trim()
 });
 
 
@@ -24,7 +24,7 @@ blogPostSchema.methods.serialize = function(){
   return {
     id: this._id,
     title: this.title,
-    author: this.fullName,
+    author: this.authorName,
     content: this.content,
   };
 };

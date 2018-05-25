@@ -32,12 +32,9 @@ router.get('/:id', (req, res) => {
           }); 
       });
 
-
-   
-   
-  /*  
+ 
 //POST
-router.post('/', jsonParser, (req, res) => {
+router.post('/',  (req, res) => {
     const requiredFields = ['title', 'content', 'author'];
     for (let i=0; i<requiredFields.length; i++){
         const field =requiredFields[i];
@@ -47,9 +44,28 @@ router.post('/', jsonParser, (req, res) => {
             return res.status(400).send(message);
         }
     }
-    const entry = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
-    res.status(201).json(entry);
-});
+    BlogPost
+        .create({
+            title: req.body.title,
+            content: req.body.content,
+            author: { 
+                firstName: req.body.author.firstName,
+                lastName: req.body.author.lastName    
+            }
+        })
+        .then(blogpostdata => { 
+            res.status(201).json(blogpostdata.serialize());
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' }); 
+        });
+    });
+
+
+    
+  /*  
+    
 
 //PUT
 router.put('/:id', jsonParser, (req, res) => {
