@@ -101,12 +101,19 @@ router.put('/:id', (req, res) => {
             });
         });
 
-/*
 //DELETE
 router.delete('/:id', (req, res) => {
-    BlogPosts.delete(req.params.id);
-    console.log(`Deleted Shopping list item \`${req.params.id}\``);
-    res.status(204).end();
-});
-*/
+    BlogPost
+        .findByIdAndRemove(req.params.id)
+        .then(blogpostdata => {
+            console.log(`Deleted Shopping list item \`${req.params.id}\``);
+            res.status(204).end();
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' }); 
+        });
+    });
+
+
 module.exports = router;
